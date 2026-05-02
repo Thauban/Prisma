@@ -35,6 +35,8 @@ model Soldat {
   aktualisiert DateTime      @default(now()) @db.Timestamp(6) @updatedAt
   ausruestung  Ausruestung?
   verletzungen   Verletzung[]
+  ausruestung  Ausruestung
+  verletzungen   verletzung[]
 
   @@index([nachname])
   @@map("soldat")
