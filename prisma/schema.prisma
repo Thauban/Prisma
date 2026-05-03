@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
+  output = "../src/generated/prisma"
 }
 
 datasource db {
@@ -35,8 +35,6 @@ model Soldat {
   aktualisiert DateTime      @default(now()) @db.Timestamp(6) @updatedAt
   ausruestung  Ausruestung?
   verletzungen   Verletzung[]
-  ausruestung  Ausruestung
-  verletzungen   verletzung[]
 
   @@index([nachname])
   @@map("soldat")
@@ -55,18 +53,6 @@ model Verletzung {
 
   @@index([soldatId])
   @@map("verletzung")
-  @@schema("soldat")
-}
-
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-model verletzungen {
-  id                     Int      @id @default(autoincrement())
-  verletzungsbezeichnung String
-  behandelt              Boolean
-  verletzungsdatum       DateTime @db.Date
-  soldat_id              Int
-
-  @@index([soldat_id])
   @@schema("soldat")
 }
 

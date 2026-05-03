@@ -61,14 +61,14 @@ try {
     await prisma.$connect();
 
     // Das Resultat ist null, falls kein Datensatz gefunden
-    const soldat: Soldat | null = await prisma.soldat.findUnique({
-        where: { id: 1 },
+    const soldat: Soldat | null = await prisma.soldat.findFirst({
+    orderBy: { id: 'asc' },
     });
     message = styleText(['black', 'bgWhite'], 'soldat');
     console.log(`${message} = %j`, soldat);
     console.log();
 
-    const soldaten: SoldatMitVerletzungUndAusruestung[] = await prisma.soldat.findMany({
+    const soldatenMitVerletzungen: SoldatMitVerletzungUndAusruestung[] = await prisma.soldat.findMany({
             where: {
         verletzungen: {
             some: {
@@ -83,8 +83,8 @@ try {
         ausruestung: true,
     },
     });
-    message = styleText(['black', 'bgWhite'], 'soldatenMitVer');
-    console.log(`${message} = %j`, soldaten);
+    message = styleText(['black', 'bgWhite'], 'soldatenMitVerletzungen');
+    console.log(`${message} = %j`, soldatenMitVerletzungen);
     console.log();
 
     // Pagination

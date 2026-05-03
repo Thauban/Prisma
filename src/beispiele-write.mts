@@ -122,7 +122,9 @@ try {
 
         // https://www.prisma.io/docs/orm/prisma-schema/data-model/relations/referential-actions#referential-action-defaults
         // https://www.prisma.io/docs/orm/prisma-schema/data-model/relations/relation-mode
-        const geloescht = await tx.soldat.delete({ where: { id: 70 } });
+        const geloescht = await tx.soldat.delete({
+        where: { id: soldatDb.id },
+    });
         // eslint-disable-next-line require-atomic-updates
         message = styleText(['black', 'bgWhite'], 'Geloescht:');
         console.log(`${message} ${geloescht.id}`);
